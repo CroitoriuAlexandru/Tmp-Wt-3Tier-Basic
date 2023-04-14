@@ -1,8 +1,8 @@
 #include "include/ExampleInterfaceI.h"
 #include <Wt/WDateTime.h>
 
-ExampleInterfaceI::ExampleInterfaceI()
-: session_()
+ExampleInterfaceI::ExampleInterfaceI(std::unique_ptr<Wt::Dbo::SqlConnection> conn)
+: session_(std::move(conn))
 {
 }
 

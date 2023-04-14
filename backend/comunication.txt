@@ -1,0 +1,3 @@
+ExampleAdapter
+default -p 10000
+Example

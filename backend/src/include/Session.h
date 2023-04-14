@@ -6,7 +6,7 @@
 class Session : public Wt::Dbo::Session 
 {
 public:
-    Session();
+    Session(std::unique_ptr<Wt::Dbo::SqlConnection> conn);
     ~Session();
 
     void addRecord(ExampleModule::RowData exampleTable_Data);

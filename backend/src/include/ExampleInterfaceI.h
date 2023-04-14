@@ -1,14 +1,13 @@
 #pragma once
 #include "../../../comunication/Example.h"
 #include "Session.h"
-#include <Ice/Ice.h>
 
 using namespace ExampleModule;
 
 class ExampleInterfaceI : public ExampleInterface
 {
 public:
-    ExampleInterfaceI();
+    ExampleInterfaceI(std::unique_ptr<Wt::Dbo::SqlConnection> conn);
 
     virtual void addRowData(RowData data, const Ice::Current&) override;
     virtual AllRowData getRowsData(const Ice::Current&) override;

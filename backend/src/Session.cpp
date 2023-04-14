@@ -1,11 +1,11 @@
 #include "include/Session.h"
-#include <Wt/Dbo/backend/Sqlite3.h>
 #include "include/TableTest.h"
 #include <Wt/WDateTime.h>
 
-Session::Session()
+Session::Session(std::unique_ptr<Wt::Dbo::SqlConnection> conn)
 {
-    setConnection(std::make_unique<Wt::Dbo::backend::Sqlite3>("test.db"));
+    setConnection(std::move(conn));
+
     try {
 
         mapClass<TableData>("example_table");
