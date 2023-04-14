@@ -20,6 +20,8 @@ RUN git clone https://github.com/emweb/wt.git wt && \
 RUN cp /usr/local/lib/libwt*.so.* /usr/lib/
 
 COPY . /app
+COPY ../comunication /comunication
+
 WORKDIR /app
 RUN make
 
@@ -36,13 +38,11 @@ COPY --from=builder /usr/lib/libwt*.so.* /usr/lib/
 COPY --from=builder /usr/include/boost/* /usr/include/boost/
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libboost* /usr/lib/x86_64-linux-gnu/
 
-COPY --from=builder /app/resources /app/resources
-COPY --from=builder /app/app /app
-COPY --from=builder /app/wt_config.xml /app
+COPY --from=builder /app/backend /app
+
 
 WORKDIR /app
-EXPOSE 9090
-CMD ./app --docroot . -c ./wt_config.xml --http-address 0.0.0.0 --http-port 9090
+CMD ./backend
 
 # docker build . -t wt
 # docker run -it -d -p 9090:9090 --name wt-app wt

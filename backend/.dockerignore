@@ -1,0 +1,7 @@
+/src/obj/*.o
+/*.d
+/Dockerfile
+/Jenkinsfile
+/README.md
+.gitignore
+.git

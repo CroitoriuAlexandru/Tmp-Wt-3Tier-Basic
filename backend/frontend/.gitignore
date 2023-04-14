@@ -1,4 +1,0 @@
-.vscode
-app
-/src/obj/*.o
-*.d
