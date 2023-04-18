@@ -1,8 +1,8 @@
-# Template Wt app with Theme and Navigation
+# Wt Ui template with Theme and Navigation
 
 ## Instalation
 
-Just folow the Dockerfile instructions and you are golden with one exception, the Wt libraries may not link after the install and there are two fixes for that
+Just folow the Dockerfile instructions from ../Dockerfile and you are golden with one exception, the Wt libraries may not link after the install and there are two fixes for that
 1. run the next command to dynamicly link to those binaries 
 ~~~
 export LD_LIBRARY_PATH=/usr/local/lib/
@@ -27,9 +27,9 @@ In case you want to run this in a container, you have a dockerfile to :D
 Jenkins file ready to go, working with script files from folder /scripts for building, testing and deploying the app
 
 ### Sqlite database
-Sqlite3 is implemented in "Session" class
+Sqlite3 is implemented in the backend Tier
 
 ### Example of putting and getting data from the dbo 
-The example(PageOne and Session classes) has a form with different data types and a table witch represents the table in the sqlite dbo
+The example PageOne has a form with different data types and a table witch represents the table in the sqlite dbo
 You can put rows in table, modify data individualy, and every change you make in the table is reflected in the dbo
 
