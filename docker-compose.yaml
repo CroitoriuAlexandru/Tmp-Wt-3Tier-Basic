@@ -1,0 +1,26 @@
+version: "3"
+services:
+  frontend:
+    image: wt:frontend
+    depends_on:
+      - backend
+    ports:
+      - "9095:9095"
+    networks:
+      exampleNet:
+        ipv4_address: 192.168.65.2
+
+  backend:
+    image: wt:backend
+    hostname: backendHost
+    networks:
+      exampleNet:
+        ipv4_address: 192.168.65.3
+
+networks:
+  exampleNet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.65.0/24"

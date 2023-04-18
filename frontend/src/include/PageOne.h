@@ -36,6 +36,7 @@ private:
     std::string dateFormat_ = "dd/MM/yyyy";
     std::string timeFormat_ = "HH:mm";
     std::string dateTimeFormat_ = Wt::WString(dateFormat_ + " " + timeFormat_).toUTF8();
+    std::string comunicationString_;
 
     Wt::WTable* table_;
 

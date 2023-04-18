@@ -1,3 +1,2 @@
 src/obj/*.o
 *.d
-test.db

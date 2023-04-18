@@ -16,11 +16,16 @@ main(int argc, char* argv[])
 {
 
     ifstream connFile("comunication.txt");
-    std::ifstream dboConnFile("dboConnString.txt");
+    ifstream dboConnFile("dboConnString.txt");
+
+    string connAdapter;
+    string connString;
+    string proxyString;
 
     if(!dboConnFile.is_open())
     {
         std::cerr << "\n\n Could not open dboConnString.txt \n\n";
+        return 1;
     }
     std::string dboConnString;
     getline(dboConnFile, dboConnString);
@@ -28,16 +33,12 @@ main(int argc, char* argv[])
 
     if(!connFile.is_open())
     {
-        cerr << "Could not open comunication.txt" << endl;
+        std::cerr << "\n\n Could not open comunication.txt \n\n";
         return 1;
     }
-
-    string connAdapter;
-    string connString;
-    string proxyString;
-    getline(connFile, connAdapter);
-    getline(connFile, connString);
-    getline(connFile, proxyString);
+        getline(connFile, connAdapter);
+        getline(connFile, connString);
+        getline(connFile, proxyString);
 
 
     std::cout << "\n\nIce connection adapter <" << connAdapter << ">\n";

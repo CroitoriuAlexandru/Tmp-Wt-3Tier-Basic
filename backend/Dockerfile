@@ -1,27 +1,8 @@
-FROM ubuntu:latest as builder
+FROM wt:wt as builder
 
-# install necesary tools
-RUN apt-get update && apt-get install -y \
-    git \
-    cmake \
-    build-essential \
-    libboost-all-dev \
-    zeroc-ice-all-dev
-
-# Build step
-RUN git clone https://github.com/emweb/wt.git wt && \
-    cd wt/ && \
-    mkdir build && \ 
-    cd build/ && \
-    cmake ../ && \
-    make && \
-    make install 
-
-RUN cp /usr/local/lib/libwt*.so.* /usr/lib/
-
-COPY . /app
-COPY ../comunication /comunication
-
+COPY /comunication /comunication
+COPY /backend /app
+RUN cd comunication && make
 WORKDIR /app
 RUN make
 
@@ -38,11 +19,11 @@ COPY --from=builder /usr/lib/libwt*.so.* /usr/lib/
 COPY --from=builder /usr/include/boost/* /usr/include/boost/
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libboost* /usr/lib/x86_64-linux-gnu/
 
-COPY --from=builder /app/backend /app
-
-
+COPY --from=builder /app /app
 WORKDIR /app
 CMD ./backend
 
-# docker build . -t wt
+# Launch the build command from the parent directory
+# docker build -t wt:backend -f backend/Dockerfile .
+
 # docker run -it -d -p 9090:9090 --name wt-app wt

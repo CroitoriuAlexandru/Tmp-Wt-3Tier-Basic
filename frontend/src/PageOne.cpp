@@ -11,11 +11,28 @@
 
 #include <Ice/Ice.h>
 #include <stdexcept>
- 
+#include <fstream>
+
 PageOne::PageOne()
     : WContainerWidget()
 {
     addStyleClass("my-3 border p-3 container-lg");
+
+    std::ifstream commFile("comunication.txt");
+    if(!commFile.is_open())
+    {
+        commFile.open("comunicationLocalNetwork.txt");
+        if(!commFile.is_open())
+        {
+            std::cerr << "\n\n Could not open comunicationString.txt  of comunicationLocalNetwork.txt file \n\n";
+            return;
+        }
+        getline(commFile, comunicationString_);
+    }
+    else
+    {
+        getline(commFile, comunicationString_);
+    }
 
     formTemplate_ =  addWidget(std::move(create_formWidget()));
     addWidget(std::make_unique<Wt::WContainerWidget>())->setStyleClass("border my-3");
@@ -248,7 +265,7 @@ void PageOne::submitBtnClicked()
     // add record to dbo
     try {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -282,7 +299,7 @@ ExampleModule::AllRowData PageOne::getAllRowsData()
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -303,7 +320,7 @@ void PageOne::stringInputChanged(int rowId, std::string stringData)
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -323,7 +340,7 @@ void PageOne::selectInputChanged(int rowId, ExampleModule::Enumeration enumValue
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -343,7 +360,7 @@ void PageOne::doubleInputChanged(int rowId, double doubleValue)
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -363,7 +380,7 @@ void PageOne::boolInputChanged(int rowId, bool boolValue)
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -383,7 +400,7 @@ void PageOne::dateTimeInputChanged(int rowId, Wt::WDateTime dateTime)
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {
@@ -403,7 +420,7 @@ void PageOne::deleteRecord(int rowId)
     try
     {
         Ice::CommunicatorHolder ich = Ice::initialize();
-        auto base = ich->stringToProxy("Example:default -p 10000");
+        auto base = ich->stringToProxy(comunicationString_);
         auto exampleInterface = Ice::checkedCast<ExampleModule::ExampleInterfacePrx>(base);
         if(!exampleInterface)
         {

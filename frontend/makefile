@@ -14,7 +14,7 @@ DBONAME = test.db
 LDFLAGS =  -lwthttp -lwt -lwtdbo -lwtdbosqlite3 -lpthread -lIce++11
 
 # Runtime lib
-RLIB = --docroot . -c ./wt_config.xml --http-address 0.0.0.0 --http-port 9090
+RLIB = --docroot . -c ./wt_config.xml --http-address 0.0.0.0 --http-port 9095
 
 
 ############## Creating variables #############
