@@ -1,17 +1,18 @@
 # Images names
-BASE_NAME = wt:wt
+BASE_NAME = wt:latest
 FRONT_NAME = wt:frontend
 BACK_NAME = wt:backend
 
 # Building the images
-build: wt-build frontend-build backend-build
+build: wt-latest wt-frontend wt-backend
 	docker compose up
 
-frontend-build: wt-build
+wt-frontend: wt-latest
 	docker build -t $(FRONT_NAME) -f frontend/Dockerfile .
 
-backend-build: wt-build
+wt-backend: wt-latest
 	docker build -t $(BACK_NAME) -f backend/Dockerfile .
 
-wt-build:
+wt-latest:
 	docker build -t $(BASE_NAME) .
+

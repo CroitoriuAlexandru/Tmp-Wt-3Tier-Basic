@@ -1,4 +1,4 @@
-FROM wt:wt as builder
+FROM wt:latest as builder
 
 COPY /comunication /comunication
 COPY /backend /app

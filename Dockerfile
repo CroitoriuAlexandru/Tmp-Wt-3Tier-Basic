@@ -15,11 +15,11 @@ RUN git clone https://github.com/emweb/wt.git wt && \
     cd build/ && \
     cmake ../ && \
     make && \
-    make install
-
-RUN rm -fr /wt
+    make install && \
+    cd ../.. && \
+    rm -r wt
 
 RUN cp /usr/local/lib/libwt*.so.* /usr/lib/
 
-# Launch the build command from the parent directory
+# Launch command from the parent directory
 # docker build -t wt:frontend -f frontend/Dockerfile .
